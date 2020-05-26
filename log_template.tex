@@ -1,0 +1,30 @@
+\documentclass{article}
+
+\usepackage[margin=0.1in]{geometry}
+
+\author{Marco}
+\title{log table}
+
+\begin{document}
+\maketitle
+
+{% for page in table.pages %}
+\begin{table}[]
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l||l|l|l|l|l|l|l|l|l|}
+    \hline
+        & \multicolumn{10}{c|}{\textbf{digits}} & \multicolumn{9}{|c|}{\textbf{mean difference}}\\ \hline
+        & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9}\\ \hline
+        {% for line in page %}
+            \textbf{ {{ line.base }} } &
+            {% for value in line.values %}
+                {{ value }} &
+            {% endfor %}
+            {% for mean in line.means %}
+                {{ mean }}{% if not loop.last %} &{% endif %}
+            {% endfor %}
+            \\ \hline
+        {% endfor %}
+    \end{tabular}
+\end{table}
+{% endfor %}
+\end{document}
