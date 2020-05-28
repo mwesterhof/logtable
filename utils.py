@@ -1,19 +1,27 @@
 import math
+from collections import namedtuple
+
+
+Page = namedtuple('Page', ['start', 'end', 'lines'])
 
 
 def sliceinator(total_set, slice_size):
     total_count = len(total_set)
     if slice_size >= total_count:
-        yield total_set
+        yield Page(start=100, end=99 + total_count, lines=total_set)
     else:
-        yield total_set[:slice_size]
+        yield Page(start=100, end=99+slice_size, lines=total_set[:slice_size])
 
         current_start = slice_size
         current_end = current_start + slice_size
         run = True
 
         while run:
-            yield total_set[current_start:current_end]
+            yield Page(
+                start=current_start+100,
+                end=current_end+99,
+                lines=total_set[current_start:current_end]
+            )
             current_start = current_end
             current_end += slice_size
             if current_end > total_count:
