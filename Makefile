@@ -15,3 +15,6 @@ clean:
 
 watch:
 	ag -l |entr make
+
+export: table.pdf
+	cp table.pdf exported.pdf
